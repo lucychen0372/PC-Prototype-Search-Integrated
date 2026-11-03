@@ -17,7 +17,7 @@ Open **http://localhost:3010**. `Ctrl+C` stops it.
 
 Use the offline copy, which already includes all dependencies (Apple Silicon Macs only):
 
-1. Download [nc-search-prototype-offline.zip](https://github.com/lucychen0372/PC-Prototype-Search-Integrated-/releases/latest/download/nc-search-prototype-offline.zip) and unzip it.
+1. Download [global-design-prototype-template-offline.zip](https://github.com/lucychen0372/PC-Prototype-Search-Integrated-/releases/latest/download/global-design-prototype-template-offline.zip) (about 270 MB) and unzip it.
 2. In Terminal: `cd global-design-prototype-template-offline && ./prototypes/nc-search-key-flow/start.sh`
 3. If macOS blocks it, run `xattr -rd com.apple.quarantine .` in that folder and try again.
 
