@@ -1,0 +1,5 @@
+.page-header {
+  background-color: var(--color-background-base);
+  border-bottom: 1px solid var(--color-border-separator);
+  min-height: 50px;
+}

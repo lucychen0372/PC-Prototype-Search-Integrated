@@ -1,0 +1,86 @@
+.vm-page {
+  min-height: 100%;
+}
+
+.vm-wizard-modal {
+  width: 100%;
+  height: 100%;
+}
+
+.vm-content {
+  padding-bottom: 20px;
+  width: 100%;
+}
+
+/* Fixed-position container for the transient create/update success toast.
+   Prism has no global toast/notification placement prop, so positioning is
+   set here; colors come from the Alert component's own tokens. */
+.vm-page__success-toast {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  z-index: 1000;
+  max-width: 420px;
+}
+
+.vm-link {
+  color: var(--color-text-primary);
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+  max-width: 100%;
+  overflow: hidden;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vm-link:visited,
+.vm-link:active,
+.vm-link:hover {
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.vm-truncate {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+.vm-list-more-link {
+  background: none;
+  border: 0;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vm-cluster-cell {
+  min-width: 0;
+  width: 100%;
+}
+
+.vm-cluster-link {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.vm-cluster-type-tag {
+  flex: 0 0 auto;
+  white-space: nowrap;
+
+  & * {
+    white-space: nowrap;
+  }
+}

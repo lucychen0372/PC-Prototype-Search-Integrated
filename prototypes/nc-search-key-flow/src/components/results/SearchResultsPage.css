@@ -1,0 +1,64 @@
+/* Structure + spacing only; colors come from Prism tokens. */
+
+.results-page {
+  overflow: auto;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* The page scrolls; sections keep their full height instead of shrinking to fit */
+.results-page > * {
+  flex-shrink: 0;
+}
+
+.results-title .results-scope {
+  width: 140px;
+}
+
+.ntnx.results-section {
+  overflow: hidden;
+}
+
+/* "Cluster ABC · 6 VMs": the link is the title, the count reads as metadata */
+.ntnx-link.results-section-title-link {
+  font: inherit;
+}
+
+.results-section-count {
+  color: var(--color-text-secondary-label);
+  font-weight: 400;
+}
+
+.results-section .ntnx.results-section-header,
+.results-section .ntnx.results-section-footer {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--color-border-separator);
+}
+
+.results-section .ntnx.results-section-footer {
+  border-top: 1px solid var(--color-border-separator);
+  border-bottom: 0;
+}
+
+/* Section menus sit flush inside the card; rows reuse the dropdown anatomy */
+.ntnx.search-menu.results-menu {
+  overflow: visible;
+  padding: 0;
+  box-shadow: none;
+  border: 0;
+}
+
+.search-menu .search-menu-item.results-menu-item.ntnx-menu-item {
+  padding: 7px 15px;
+}
+
+.search-menu .search-menu-item.results-menu-item + .results-menu-item {
+  border-top: 1px solid var(--color-border-separator);
+}
+
+/* Same dashed AI surface as the dropdown's Ask NIVA card */
+.ntnx.results-niva-block {
+  border: 1px dashed var(--color-border-interactive);
+  border-radius: 4px;
+  background: var(--color-background-base-hover);
+}

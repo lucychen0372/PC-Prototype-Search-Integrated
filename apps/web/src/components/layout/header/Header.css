@@ -1,0 +1,26 @@
+/* Navigation Header - Dark Theme */
+.navigation-header {
+  background-color: var(--color-background-nav-base);
+  border-bottom: 1px solid var(--color-border-nav-separator);
+  min-height: 48px;
+
+  /* Icons */
+  & svg {
+    color: var(--color-text-nav-primary-interactive) !important;
+    fill: currentColor;
+  }
+
+  /* Links */
+  & a {
+    color: var(--color-text-nav-secondary-interactive) !important;
+
+    &:hover {
+      color: var(--color-text-nav-hover) !important;
+    }
+  }
+
+  /* Buttons */
+  & button svg {
+    color: var(--color-text-nav-primary-interactive) !important;
+  }
+}

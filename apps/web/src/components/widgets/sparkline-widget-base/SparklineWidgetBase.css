@@ -1,0 +1,92 @@
+/* Sparkline Widget Base Styles */
+
+/* Cluster name truncation */
+.sparkline-cluster-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.sparkline-cluster-name {
+  display: block !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: 16px;
+  line-height: 16px;
+
+  /* Override Prism UI Link's internal flex layout to enable ellipsis */
+  .ntnx-flex-layout {
+    display: block !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+
+    > span {
+      display: block !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+      width: 100%;
+      height: 16px;
+      max-width: 100%;
+      min-width: 0;
+    }
+  }
+}
+
+/* Common sparkline and value display */
+.usage-and-last-value,
+.latency-and-last-value {
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.sparkline-container {
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: 100%;
+
+  .sparkline-svg {
+    display: block;
+    width: 100%;
+    max-width: 80px;
+    height: 20px;
+    overflow: visible;
+  }
+}
+
+/* Value display container */
+.last-value-container {
+  min-width: 60px;
+  text-align: right;
+  font-weight: 500;
+}
+
+/* Table action column */
+.action-col {
+  width: 16%;
+}
+
+/* Custom header styles for widgets with additional controls */
+.sparkline-widget-header {
+  width: 100%;
+  padding: 0 20px;
+
+  .time-range-selector {
+    margin-left: auto;
+  }
+}

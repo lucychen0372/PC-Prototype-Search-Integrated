@@ -1,0 +1,31 @@
+.search-results-v1-page {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+.search-results-v1-banner-content {
+  width: 100%;
+}
+
+.search-results-v1-chat-panel {
+  border: 1px solid var(--color-border-separator);
+}
+
+.search-results-v1-banner-row {
+  width: 100%;
+}
+
+.search-results-v1-niva-alert .alert-message {
+  display: flex;
+  align-items: center;
+}
+
+.search-results-v1-related-links {
+  background: transparent;
+}
+
+.search-results-v1-result-row {
+  background: var(--color-background-base);
+  border: 1px solid var(--color-border-separator);
+}

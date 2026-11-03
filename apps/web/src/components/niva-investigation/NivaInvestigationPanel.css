@@ -1,0 +1,117 @@
+.niva-investigation-panel {
+  border-left: 1px solid var(--color-border-separator);
+}
+
+.niva-investigation-panel .body,
+.niva-investigation-panel .content,
+.niva-investigation-panel .niva-panel-body {
+  min-height: 0;
+  height: 100%;
+}
+
+.niva-panel-body {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.niva-conversation {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+.niva-investigation-panel .ntnx-text-label,
+.niva-investigation-panel .ntnx-title,
+.niva-investigation-panel .ntnx-paragraph,
+.niva-investigation-panel .ntnx-link,
+.niva-investigation-panel span {
+  line-height: 20px !important;
+}
+
+.niva-investigation-panel .ntnx-title {
+  line-height: 24px !important;
+}
+
+.niva-loading-card,
+.niva-finding-row,
+.niva-summary-card,
+.niva-next-steps {
+  border: 1px solid var(--color-border-separator);
+}
+
+.niva-summary-card {
+  min-width: 145px;
+}
+
+.niva-dashboard-table {
+  width: 100%;
+}
+
+.niva-bar-chart {
+  min-height: 120px;
+}
+
+.niva-alert-bar {
+  width: 24px;
+  min-height: 8px;
+  background: var(--color-background-primary);
+  border-radius: 2px 2px 0 0;
+}
+
+.niva-alert-bar--0 {
+  height: 8px;
+}
+
+.niva-alert-bar--1 {
+  height: 30px;
+}
+
+.niva-alert-bar--2 {
+  height: 60px;
+}
+
+.niva-alert-bar--3 {
+  height: 90px;
+}
+
+.niva-user-prompt {
+  max-width: 80%;
+}
+
+.niva-assistant-response {
+  max-width: 100%;
+}
+
+.niva-chat-composer-shell {
+  flex: 0 0 auto;
+  background: var(--color-background-base);
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.niva-chat-composer {
+  align-self: center;
+  border: 1px solid var(--color-border-focus-interactive);
+  box-sizing: border-box;
+  width: calc(100% - 40px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.niva-chat-composer-input {
+  width: 100%;
+}
+
+.niva-chat-composer-input textarea {
+  min-height: 70px;
+}
+
+.niva-chat-mention {
+  padding-left: 5px;
+}
+
+@media (max-width: 1200px) {
+  .niva-investigation-panel {
+    min-width: 360px;
+  }
+}

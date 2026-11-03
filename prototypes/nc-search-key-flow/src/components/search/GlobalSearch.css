@@ -1,0 +1,233 @@
+/*
+ * Structure + spacing only. No color / background / border-color overrides.
+ * Spacing values map to Prism layout tokens (tokens.md):
+ *   none=0, XS=5, S=10, M=15, L=20, XL=30, XXL=40
+ */
+
+/*
+ * Header TRIGGER only (not the popup) — same pattern as template
+ * NavSearch.css: nav field sits on dark header. Popup has zero color CSS.
+ */
+.search-combo {
+  min-width: 560px;
+  width: 560px;
+  border-radius: 4px;
+  background: var(--color-background-nav-base-alt);
+}
+
+.search-scope {
+  flex: 0 0 auto;
+}
+
+/* Template DomainSwitcher is 240px; the scope only needs to fit the domain name */
+.search-scope .domain-switcher {
+  width: 150px;
+}
+
+.search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+
+  & .text-input-wrapper {
+    background: transparent !important;
+  }
+
+  & .ntnx-text-input {
+    color: var(--color-text-nav-primary-interactive) !important;
+
+    &::placeholder {
+      color: var(--color-text-nav-tertiary-interactive) !important;
+    }
+  }
+}
+
+/* Panel width aligned to field; caret removed (structure only) */
+.search-dropdown-popup {
+  min-width: 560px;
+  width: 560px;
+}
+
+.search-dropdown-popup .popup-arrow {
+  display: none !important;
+}
+
+.search-dropdown-popup .popup-wrapper {
+  min-width: 560px;
+  width: 560px;
+}
+
+/* Clip the white menu and grey hint bar to the panel's rounded border */
+.search-dropdown-popup .popup-content {
+  overflow: hidden;
+}
+
+.search-popup {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 80px);
+}
+
+.ntnx.search-menu {
+  min-width: 0;
+  width: 100%;
+  flex: 1 1 auto;
+  overflow: auto;
+  padding-top: 7px;
+  padding-bottom: 0;
+}
+
+/* Section headers — breathing room above and below */
+.ntnx.search-menu .ntnx-menu-group > .mg-title {
+  padding: 7px 14px;
+}
+
+.ntnx.search-menu .ntnx-menu-group > .mg-title,
+.ntnx.search-menu .ntnx-menu-group > .mg-title * {
+  color: var(--color-text-tertiary-label) !important;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* Ask NIVA: dashed card on subtle surface; narrower row inset so the card is wider */
+.search-menu .search-menu-item.search-niva-item.ntnx-menu-item {
+  padding: 7px;
+}
+
+/* 7px item inset + 1px border + 6px = the rows' 14px, so icon and text share their edges */
+.ntnx .search-niva-card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 6px;
+  border: 1px dashed var(--color-border-interactive);
+  border-radius: 4px;
+  background: var(--color-background-base-hover);
+}
+
+.search-niva-card .search-niva-query {
+  font-weight: 600;
+}
+
+.ntnx.search-menu .ntnx-menu-group + .ntnx-menu-group > .mg-title {
+  padding-top: 10px;
+}
+
+.search-menu .search-menu-item.ntnx-menu-item {
+  padding: 7px 14px;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.search-row-text .search-row-text-stack {
+  gap: 2px;
+}
+
+/* Metadata, type tags, type labels, breadcrumbs: DS hint grey */
+.search-row-secondary,
+.search-row-secondary .ntnx-link,
+.search-row-crumb-separator,
+.search-row-type,
+.search-row-tag.ntnx-badge {
+  color: var(--color-text-tertiary-label) !important;
+}
+
+.search-row-secondary .ntnx-link {
+  text-decoration-color: var(--color-border-separator-contrast);
+}
+
+/* Prism SMALL is weight 500 — heavier than the 400 name; keep metadata lighter */
+.search-row-secondary,
+.search-row-secondary .ntnx-link,
+.search-row-type {
+  font-weight: 400 !important;
+}
+
+/* Don't wash TextLabel hierarchy to link-blue on hover/active */
+.search-menu .search-menu-item.ntnx-menu-item:hover,
+.search-menu .search-menu-item.ntnx-menu-item[data-active='true'] {
+  color: inherit;
+}
+
+.search-row {
+  width: 100%;
+  text-align: left;
+}
+
+.search-row-tag-slot {
+  width: 36px;
+  min-width: 36px;
+  max-width: 36px;
+}
+
+/* AI icon starts where the 28px type tags start inside their centered slot */
+.ntnx .search-row-tag-slot.-start {
+  padding-left: 4px;
+}
+
+.search-row-tag.ntnx-badge {
+  min-width: 28px;
+  justify-content: center;
+}
+
+.search-row-text {
+  min-width: 0;
+  text-align: left;
+}
+
+.search-row-primary,
+.search-row-secondary {
+  text-align: left;
+  width: 100%;
+}
+
+.search-row-breadcrumbs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: left;
+}
+
+.search-row-crumb {
+  display: inline-flex;
+  align-items: center;
+}
+
+.search-row-crumb-separator {
+  margin: 0 4px; /* optical; < XS */
+}
+
+.search-row-type {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+/* Typed words in a result name (wireframe: "Cluster **ABC** › **VMs**") */
+.search-row-match {
+  font-weight: 600;
+}
+
+/* ↵ on the highlighted Top Match / Ask NIVA row; slot reserved so the type label never shifts */
+.search-row-enter {
+  flex: 0 0 auto;
+}
+
+.search-row-enter .badge-count {
+  background: var(--color-background-base) !important;
+  color: var(--color-text-tertiary-label) !important;
+}
+
+/* Footer: same horizontal padding as rows (L); grey surface wraps the hints */
+.ntnx.search-hint-bar {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  background: var(--color-background-body);
+}
+
+.search-hint-bar .ntnx-text-label,
+.search-hint-bar .ntnx-badge {
+  color: var(--color-text-tertiary-label) !important;
+}
+
+/* Prism paints the tag fill on the inner .badge-count, not the .ntnx-badge root */
+.search-hint-bar .ntnx-badge .badge-count {
+  background: var(--color-background-base) !important;
+}

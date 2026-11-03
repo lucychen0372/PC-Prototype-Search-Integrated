@@ -1,0 +1,6 @@
+/* PRISM: no built-in equivalent — portal anchor for Notification */
+.notification-anchor {
+  position: fixed;
+  top: 80px;
+  right: 24px;
+}

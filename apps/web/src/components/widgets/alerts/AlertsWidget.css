@@ -1,0 +1,21 @@
+.badge-text {
+  white-space: nowrap;
+}
+
+.alert-progress-container {
+  height: 8px;
+  width: 100%;
+  overflow: hidden;
+  gap: 1px !important;
+}
+
+.alert-progress-segment {
+  height: 100%;
+  min-width: 0;
+  width: var(--segment-width, 0%);
+  background: var(--segment-color, transparent);
+}
+
+.tooltip-content {
+  max-width: 300px;
+}

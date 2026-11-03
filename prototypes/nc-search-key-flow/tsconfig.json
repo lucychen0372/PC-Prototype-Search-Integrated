@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["es2022", "es2023.array", "dom", "dom.iterable"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "types": ["vite/client"],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["../../apps/web/src/*"],
+      "@proto/*": ["./src/*"],
+      "@template-api/*": ["../../apps/api/src/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"]
+}

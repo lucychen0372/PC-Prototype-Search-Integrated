@@ -1,0 +1,18 @@
+.vm-resources-step {
+  width: 100%;
+}
+
+.vm-resources-step .ntnx-table {
+  width: 100%;
+}
+
+.vm-resources-step__full-width {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.vm-shield-vm-section__outer,
+.vm-shield-vm-section__body {
+  width: 100%;
+  box-sizing: border-box;
+}

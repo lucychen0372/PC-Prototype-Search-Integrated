@@ -1,0 +1,44 @@
+{
+  "name": "@nutanix-core/global-design-prototype-template",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "turbo run dev --ui tui",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "format": "turbo run format",
+    "format:lint": "turbo run format:lint",
+    "typecheck": "turbo run typecheck",
+    "check": "turbo run check",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,json,md}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:*",
+    "eslint": "^9.38.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.5",
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.4",
+    "typescript": "^5.9.3"
+  },
+  "packageManager": "pnpm@10.11.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@nutanix-ui/prism-reactjs",
+      "core-js",
+      "esbuild",
+      "unrs-resolver"
+    ]
+  }
+}

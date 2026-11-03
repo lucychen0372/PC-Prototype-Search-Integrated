@@ -1,0 +1,10 @@
+{
+  "name": "nc-search-key-flow",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node ../../apps/web/node_modules/vite/bin/vite.js --config vite.config.ts",
+    "build": "node ../../apps/web/node_modules/vite/bin/vite.js build --config vite.config.ts",
+    "preview": "node ../../apps/web/node_modules/vite/bin/vite.js preview --config vite.config.ts"
+  }
+}

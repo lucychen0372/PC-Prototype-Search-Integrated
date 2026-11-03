@@ -1,0 +1,29 @@
+/* App Switcher Styles */
+.app-switcher {
+  width: 240px;
+
+  & .text-input-wrapper {
+    background: var(--color-background-nav-base-alt) !important;
+  }
+
+  & .ntnx-text-input {
+    color: var(--color-text-nav-primary-interactive) !important;
+  }
+}
+
+.app-switcher-dropdown {
+  background: var(--color-background-nav-base-alt) !important;
+  border: none !important;
+
+  & .selected-row {
+    background: var(--color-text-tertiary-label) !important;
+  }
+
+  & .label-wrapper {
+    color: var(--color-text-nav-primary-interactive) !important;
+  }
+
+  & .select-row[data-row-hover='true']:not(.selected-row) {
+    background-color: #24272c !important;
+  }
+}

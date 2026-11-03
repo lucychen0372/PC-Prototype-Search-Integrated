@@ -1,0 +1,80 @@
+/* Dashboard Grid Layout Styles */
+.dashboard-pc {
+  margin-top: 0 !important;
+  padding: 20px;
+
+  /* Make the header draggable by using the dashboard widget header class */
+  .ntnx-dashboard-widget-header {
+    cursor: move;
+    /* cursor: grab; */
+
+    &:active {
+      cursor: move;
+    }
+  }
+
+  /* Ensure widgets fill the grid item */
+  .react-grid-item {
+    display: flex;
+    flex-direction: column;
+
+    > .dashboard-widget {
+      width: 100%;
+      height: 100%;
+    }
+
+    > .react-resizable-handle {
+      position: absolute;
+      bottom: -10px;
+      height: 20px;
+      width: 100%;
+      cursor: row-resize;
+
+      &::after {
+        display: none;
+        content: '';
+      }
+    }
+  }
+
+  /* Drag and Drop Placeholder Styles */
+  .react-grid-item.react-grid-placeholder {
+    display: none;
+  }
+
+  /* Dashboard Widget Wrapper */
+  .dashboard-widget {
+    background: var(--color-background-base);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 0 0 0 0 transparent;
+
+    &:hover {
+      box-shadow:
+        inset 0 0 0 1px var(--color-border-separator),
+        0 -1px 1px 0 rgba(0, 0, 0, 0.05),
+        0 4px 8px 0 rgba(0, 0, 0, 0.1);
+
+      .resize-icon-wrapper {
+        display: flex;
+      }
+    }
+
+    .resize-icon-wrapper {
+      display: none;
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      align-items: center;
+      background: var(--color-background-base);
+      border: 1px solid var(--color-border-separator);
+      border-radius: 50%;
+      height: 20px;
+      justify-content: center;
+      width: 20px;
+    }
+  }
+}

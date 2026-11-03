@@ -1,0 +1,63 @@
+.vm-filter-trigger {
+  display: inline-flex;
+}
+
+/* Same "+ Add" chip as NIVA's context row, at the filter tokens' height */
+.ntnx.vm-interpretation-add-filter {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  box-sizing: border-box;
+  padding: 0 8px;
+  border: 1px dashed var(--color-border-separator-contrast);
+  border-radius: 4px;
+  color: var(--color-text-secondary-label) !important;
+  text-decoration: none !important;
+
+  /* A chip, not a link: Prism's inline-link hover (blue + underline) doesn't apply */
+  &:hover,
+  &:focus-visible {
+    border-color: var(--color-border-interactive-hover);
+    background: var(--color-background-base-hover);
+    color: var(--color-text-primary-label) !important;
+  }
+
+  & .link-text {
+    display: block;
+    line-height: 20px;
+    text-decoration: none !important;
+  }
+}
+
+/* `.ntnx` specificity: Prism layouts reset their own padding */
+.ntnx.vm-filter-popover {
+  padding: 15px;
+}
+
+.ntnx.vm-filter-popover.-edit {
+  width: 300px;
+}
+
+.ntnx.vm-filter-popover.-add {
+  padding: 0;
+}
+
+.ntnx.vm-filter-field-list {
+  width: 170px;
+  padding: 15px 0;
+  border-right: 1px solid var(--color-border-separator-contrast);
+}
+
+.ntnx.vm-filter-section-label {
+  padding: 0 15px;
+}
+
+.ntnx.vm-filter-form {
+  width: 300px;
+  padding: 15px;
+}
+
+/* Native number spinners crowd Prism's input */
+.vm-filter-fields input[type='number'] {
+  appearance: textfield;
+}

@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "ms-vscode.vscode-typescript-next",
+    "christian-kohler.path-intellisense",
+    "mylesmurphy.prettify-ts",
+    "yoavbls.pretty-ts-errors",
+    "mattpocock.ts-error-translator"
+  ],
+  "unwantedRecommendations": [
+    // Extensions that might conflict
+    "ms-vscode.vscode-typescript"
+  ]
+}

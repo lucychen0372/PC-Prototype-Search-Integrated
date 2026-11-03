@@ -1,0 +1,13 @@
+.vm-management-step {
+  width: 100%;
+}
+
+.vm-management-step__policy-card {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.vm-management-step__policy-card .ntnx-text-label {
+  line-height: 20px !important;
+}

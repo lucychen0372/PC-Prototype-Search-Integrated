@@ -1,0 +1,4 @@
+/* Same vertical rhythm as `.widget-row-label` (VmDetailsPage.css) for stacked alert rows */
+.ntnx.cluster-alert-item {
+  padding: 10px 0;
+}

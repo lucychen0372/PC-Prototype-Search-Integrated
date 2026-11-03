@@ -1,0 +1,111 @@
+---
+description: Visual and structural rules for the global search dropdown (header search, Recent/Favorites, Top Match, Matches, Ask NIVA, keyboard hints). Apply whenever building or editing any search dropdown or search results popup.
+globs: prototypes/**/search/**,apps/web/src/components/layout/header/nav-search/**
+alwaysApply: false
+---
+
+# Global search dropdown rules
+
+Wireframe decides structure and emphasis; Prism design system decides tokens. Reference: `prototypes/nc-search-key-flow/src/components/search/`.
+
+## Panel
+- Light theme (default `Dropdown` + default `Menu`). Do not use `DropdownType.NAVIGATION` for this popup; no DS source says header popups are dark.
+- Same width as the full search field (scope + input), left-aligned, directly under it: `popupOffset={{ y: '-8px' }}` cancels Prism's built-in caret offset. Hide `.popup-arrow`.
+- Portal to `document.body` so `MainPageLayout` overflow can't clip it. Max height `calc(100vh - 80px)`.
+- 7px padding above the first section label; no extra padding between the last row and the footer.
+- Children must stay inside the 4px rounded border: `.popup-content { overflow: hidden }`, and never give the menu a fixed `min-width` (the area inside the 1px borders is 2px narrower than the popup).
+
+## Section titles (Recent, Favorites, Top Match, Matches)
+- Sentence case (not uppercase; caps read larger than 12px), 12px, weight 400, `--color-text-tertiary-label`. Padding 7px 14px; 10px above later sections.
+
+## Recent (empty state)
+- Only 2 seeded entries (`RECENT_IDS`). What the participant opens from search this session goes on top, newest first, deduped, max 5 rows: an entity row they picked (e.g. Cluster ABC) and the queries they ran (Top Match → `vm-list`, See all / Enter → `results`).
+- Session recents live in the prototype store, mirrored to `sessionStorage`; "Reset to start" clears them.
+- A recent query row: `HistoryIcon` in the tag slot (the one icon exception), the query as the name, its destination as metadata ("Cluster ABC › VMs" or "Search results"), type label "Search". Activating it (click or Enter) puts the query back in the search field and keeps the dropdown open with that query's results; it does not navigate.
+
+## Rows: `[type tag] [name / metadata] [type label]`
+- Padding 7px 14px; no min-height. No chevrons; type label sits at the right edge.
+- Tag: `Badge` TAG GRAY with abbreviations (VM, PG, CL, HO, DM, AL), fixed 36px slot, no icons.
+- Name: `TextLabel` PRIMARY, MEDIUM (14px), `multiLine`.
+- Metadata: `TextLabel` SECONDARY SMALL (12px), `multiLine`, weight 400, 2px below the name.
+- Breadcrumbs: `Link` INLINE_SECONDARY SMALL, underline color `--color-border-separator-contrast`, `›` separators.
+- Metadata, breadcrumbs, tags, type labels: `--color-text-tertiary-label`. Type label is SMALL, weight 400.
+- Selected row: Prism's default active-row style; alignment must not shift.
+- Semibold (600) every literal, case-insensitive substring match of each typed term (`emphasizeMatches`) in the row name and its metadata line ("cluster ab" → "**Cluster AB**C"; "vm_0680_1" → "**vm_0680_1**0"); breadcrumbs stay regular, and filler words ("on", "in", "of", "with", "the", "and") are never matched.
+- `↵` chip (`Badge` TAG, base background, tertiary text) only on the row that is hovered or keyboard-highlighted, on every row kind. Before the participant moves, the default highlight (highlight background plus chip) is always "See all N results" when it is shown. It sits at the far right and the type label moves left for it; on other rows there is no chip and the type label is right-aligned at the far right. Row height and name position never change (no reserved slot).
+
+## Top Match (condition, set / grouping, diagnostic queries)
+- Condition query = VMs plus at least one condition (cluster, power state, IOPS, CPU, memory), a ranking word (highest / top / busiest / most) or a grouping phrase (all / every / across / which / by / per cluster). It gets a "Top Match" section; which/what/show questions with conditions are condition queries, not NIVA.
+- Entity names, page names and keywords ("cluster abc", "abc", "global settings") get no Top Match and no loader: matches render immediately; "See all N results" stays the default highlight.
+- While it resolves (moderator delay, default 1500 ms): `DottedLoader` tag, "Finding the best match…", "Matches below are ready". The slot is reserved by keyword rules (`needsTopMatch`); if nothing resolves it collapses.
+- Parsing (`interpretSearch`): running / powered on / on / active → Power state On; iops / ops / i/o / io / disk activity / throughput → IOPS; high / heavy / a lot of / busy → over the threshold (IOPS > 300, CPU / memory > 80%); highest / top / busiest / most → same filter plus sort high to low; explicit numbers override the threshold; "slow / sluggish / laggy" with no metric → CPU high.
+- Names exactly one cluster (and no across phrase) → "TB" tag, "Cluster **ABC** › **VMs**", query echoed in curly quotes, type label "Filter in Entity Browser"; opens that cluster's VMs tab (sorted when a ranking word is present).
+- Names no cluster, or says all / every / across / which / by / per cluster → "RS" tag, e.g. "Running VMs with high IOPS, grouped by cluster", query echoed, type label "Results page"; opens `/search?q=<query>` in interpreted mode (grouped by cluster, sorted by the metric).
+- Diagnostic questions only (why / how come / what's causing, followed by a subject; a bare "why" is a plain question) → after the Top Match loading state, the Ask NIVA row is the Top Match; no second Ask NIVA row at the bottom. While loading (or when Top Match fails), Ask NIVA stays the last row Never label a row "Top Match" without the loading state first.
+- Order: Top Match, Matches, "See all N results", Ask NIVA last.
+
+## Highlight
+- Until the participant moves (arrow keys or mouse): "See all N results" is highlighted for every typed query (Enter opens `/search?q=<query>`), so Enter never lands on a still-loading guess; with no results Enter still opens the results page; with an empty field Enter does nothing.
+- The first ArrowDown highlights the top entry; the first ArrowUp highlights the last (Ask NIVA). Enter then opens the highlighted row.
+- Once they move, keep the highlight on the row they chose (track it by row id, not index); a new query resets it.
+- Prism `Menu` only wires clicks into *direct* `MenuItem` children. Rows rendered through a wrapper component must pass their own `onClick` to the `MenuItem`.
+
+## Row actions (click or Enter)
+- Top Match filter → by destination: one cluster → its VMs tab (`/clusters/$id?tab=vms&q=…`); across clusters → interpreted results page.
+- "See all N results for '<query>'" → `/search?q=<query>` (results page). Shown for every query intent with results; N comes from `getSearchResults`, the same set the results page lists. `MagGlassIcon` in the type-tag slot.
+- Entity rows → existing template pages only (`useOpenLink`); never build prototype-only destination pages. VM → VM details; cluster → `/clusters/$id` (cluster details, built on the VM details pattern from template data; its own VM list is the `?tab=vms` tab, a cluster-scoped template VM Entity Browser via `VmEbr` `scopeFilter: cluster==<name>`, which the header "N VMs" and Properties "VM Count" open); a VM list (Top Match, results page, NIVA) that names exactly one known cluster opens that cluster's `?tab=vms&q=…` instead of `/vms`. Every search-driven VM list is `InterpretedVmBrowser`: the template EB plus the interpretation extension (query box, tokens, + Filter, Interpret refine row); on a cluster tab the cluster is the scope: its tag is editable and removable like any other (another cluster opens that cluster's VMs tab, removing it or Clear all opens `/vms`, other filters and sort kept), it is not a + Filter field, and re-searching stays in the cluster. "slow / sluggish / laggy" with no metric named reads as CPU high (> 80%); host → `/vms` filtered to the host (no template host page); alert on a VM → that VM's details (Alerts widget); alert on a host → `/vms` filtered to the host; cluster alerts → `/clusters/$id?tab=alerts`; the "Alerts" page → Main Dashboard (Open Alerts Summary); Settings pages → `/settings`.
+- Ask NIVA → opens the NIVA side panel and sends the query as the user message; with an empty query (or "?" on an empty field) the panel opens empty with its input focused.
+- Every action closes the dropdown and clears the field.
+
+## Ask NIVA row
+- ALWAYS the last row (except as the Top Match of a diagnostic question), just above the footer, whenever anything else is in the dropdown (Recent/Favorites, matches, a Top Match, or a Top Match still loading), including question-style queries. Never move it to the top while typing or while the Top Match loads.
+- With no matches and no Top Match, Ask NIVA is the only row.
+- Dashed card: `1px dashed var(--color-border-interactive)`, 4px radius, `--color-background-base-hover`. Its row uses a 7px inset (narrower than the rows' 14px), so the card is wider; card padding 7px 6px puts its content back on the rows' 14px edge.
+- Content uses the same `RowLayout` as other rows, left-aligned, nothing centered: `AIIcon` (the three-star header icon) at the type tags' left edge (36px slot, start-aligned + 4px), then "Ask NIVA" or "Ask NIVA about **‘query’**" (query weight 600) at the names' left edge.
+
+## Footer keyboard hints
+- Background `--color-background-body`, padding 7px 14px (sides match the rows, so the first chip lines up with the tags).
+- Hints: `↑↓ move`, `↵ open`, `Esc close` (no "? Ask NIVA" hint). `Badge` TAG chip + SMALL caption, `itemGap` XS within a hint, L between hints, all `--color-text-tertiary-label`.
+- "?" is the Ask NIVA shortcut only while the field is empty; once there is text, it types a question mark.
+- Key chips are white (`--color-background-base`) on the grey bar. Set it on `.ntnx-badge .badge-count`; Prism paints the tag fill there, not on the badge root.
+
+## Search trigger
+- Placeholder "Search entities and pages". No ⌘K shortcut, chip or hint.
+
+## Domain scope selector (DND_DEMO1)
+- Reuse the template DomainSwitcher pattern: borderless Prism `Select` + `~/components/layout/header/domain-switcher/DomainSwitcher.css` (`ScopeSwitcher.tsx`), data from `SCOPES`.
+- Clicking it opens only the domain list, never the search popup: its wrapper stops click/mousedown/keydown/focus propagation to the search Dropdown trigger.
+- The search input stops click propagation and opens the popup itself (otherwise focus-open + trigger click-toggle closes it).
+
+## Gotchas
+- Prism's reset `.ntnx div, .ntnx h1–h6 { padding: 0 }` beats single-class selectors. Prefix with `.ntnx` (e.g. `.ntnx.search-hint-bar`).
+- `FlexLayout padding` only accepts listed values (`10px-20px` is not one); it's silently ignored. Use CSS.
+- `TextLabel` without `multiLine` has a squeezed line height (10px or 8px), so stacked lines touch.
+- Prism SMALL text is weight 500; set 400 for metadata.
+- The Dropdown trigger swallows Space (it's a toggle key): `stopPropagation` on Space in the input's `onKeyDown`.
+- Use `Link.LINK_TYPE` / `Link.LINK_SIZE`, not `Link.LinkType`.
+
+## Results page `/search`
+- One URL per query (`/search?q=…`); the Top Match row and "See all N results" open the same page. The mode comes from `resultsEntryFor(query)`, the same classification and Top Match the dropdown showed:
+  1. Literal (no Top Match) → keyword results grouped by type, empty filter section, no Top Match card.
+  2. Top Match is this page (across clusters) → interpreted: "Interpreting…" (Entity Browser delay), then "Interpreted from your search" with Power state / metric / Sort / Group by tokens; VMs per cluster (most first, "<Cluster link> · N VMs", rows "IOPS v · CPU v% · host", "Open in Entity Browser"); then "Other matches for your words" (literal matches only, never unrelated VMs). No Top Match card. Clear all or removing the last token → case 1 (literal matches only). No separate "exact words" link.
+  3. Top Match elsewhere (one cluster → Entity Browser; diagnostic → NIVA) → keyword results + empty filter section + Top Match card to that destination.
+  4. Hedged / low confidence ("kind of", "sort of", "a bit", "maybe" …; `isLowConfidence`) → no Top Match in the dropdown; keyword results + "Did you mean: <describeInterpretation>?" row, which fills the tokens (case 2).
+- Every results page has the same filter section between the header and the results: the shared `InterpretationBox` without its query field (caption, tokens, "+ Filter", Clear all, "Refine in plain words"); only the Entity Browser shows the query field (`onSearch`). Caption "Interpreted from your search" while any system-filled token remains, otherwise "Filters".
+- Results "+ Filter" (`ResultsFilterMenu`) uses the Entity Browser add-filter layout (categories left, choices right): Type (VM, Cluster, Host, Alert, Page), Cluster, VMs (Power state On/Off, CPU / Memory / IOPS high at the shared thresholds), Alerts (Severity), Group by (Type default, Cluster), Sort VMs (IOPS / CPU / Memory high to low).
+- Refine in plain words uses the search parser (`parseConditions`) plus alert severity words.
+- Filters apply only where relevant (`results-filters.ts`): Type hides other groups; Cluster narrows VMs, hosts, alerts and clusters; Power state and metrics narrow VMs; Host narrows VMs and hosts; Severity narrows alerts; Sort orders VMs. Groups a token skips stay visible with a footer note "Doesn't apply to hosts: Power state". Header count always counts what is shown.
+- Most literal match first in keyword mode (`rankLiteral`, same in the dropdown): exact name > prefix > word start > anywhere; the group holding the best match leads, the rest follow Clusters, VMs, Hosts, Alerts, Pages.
+- Buttons with an icon: pass `AIIcon` and the text as direct `Button` children; wrapping them in a `FlexLayout` makes Prism drop the button's side padding.
+- EBR's filter-tag styles are scoped to `.eb-top`; outside the EB restate them (`.results-interpretation .filter-bar-tag`) with the same tokens.
+- "Didn't find your intended destination?" block: prompt chips from `resultsPrompts`, following what the page shows (its filters, sort and leading cluster), never repeating the query, and always ones NIVA answers: a metric (IOPS / CPU / memory filter or sort) → only "<Metric> on <cluster>, last 24 hours" (no host-move prompt: it reads off-topic there); why / how come → "What changed on <cluster> today?" and "Latency on <cluster>, last 7 days"; a cluster only → "Show alerts across <ABC> entities" and "Why is <cluster> slow?"; otherwise "Show open alerts" and "What changed today?".
+- Moderator Reset: its own row at the bottom of the left panel (below the nav footer), never floating over page content.
+
+## NIVA panel (Ask NIVA destination)
+- Template `SidePanel` on the right; the page stays visible and usable. Resize toggle is wired (`onSizeChange`, 30vw / 50vw). Header: `AIIcon` NIVA, AI badge, resize, close.
+- Order: Context chips (page / cluster, removable; "+ Add" opens the results "+ Filter" layout with Clusters and Hosts) → user message → thinking (`Loader`, moderator NIVA delay, default 1500 ms) → answer → follow-up chips → follow-up input. Each new question scrolls to the top of the conversation (bottom spacer), answer below it.
+- Context sets the scope. Removing or adding a cluster (or a host, which brings its cluster) re-answers the latest question for the new scope: a centered note "Removed Cluster ABC from context · answer updated", then thinking and the new answer, scrolled to the top like a new question. Cluster words in the question are ignored for that re-answer (`scoped`). A removed chip stays off (the page's cluster is not re-added) until it is added or named again.
+- VM diagnostic with no cluster in the question or context ("why are my vms slow") → across-clusters answer matching the results page flow: running VMs with high IOPS per cluster, latency alert, inference naming the standout cluster ("Add Cluster ABC to the context to check it"), action "Open results grouped by cluster" → `/search?q=running vms with high iops`.
+- Answer anatomy: summary; optional chart (template `SparklineVisualization`, `--color-primitives-blue-700`, non-scaling stroke); "Evidence · From NC data · N items" rows (type tag + link); "Not confirmed" inference box on diagnostic answers only; collapsible "How I got here"; one primary action.
+- Scripts: VM metric query across clusters (interpretSearch `acrossClusters` + a metric) → per-cluster evidence + latency alert, action "Open results grouped by cluster" (`/search?view=interpreted`); one named cluster → that cluster's VMs, action to the cluster VMs tab with tokens; "why … slow" → diagnostic; "these / of these" → previous answer's filters plus the new condition; trend → chart + per-VM peaks; anything else → short honest fallback with suggested questions.
+- Follow-up chips answer about the answer they belong to, not the latest one. Links navigate the page and keep the panel open; closing keeps the conversation (reopen from the header); "Reset to start" closes and clears it.

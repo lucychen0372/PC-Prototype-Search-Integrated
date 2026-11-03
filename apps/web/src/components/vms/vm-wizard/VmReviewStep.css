@@ -1,0 +1,24 @@
+.vm-review-step {
+  width: 100%;
+}
+
+.vm-review-step__detail {
+  width: 100%;
+}
+
+/* Aphrodite renders each summary section's content on the grey body surface
+   inside a rounded card; Prism has no card variant for this, so the surface
+   token + radius are set here. */
+.vm-review-step__section-card {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--color-background-body);
+  border-radius: 4px;
+}
+
+/* Matches Aphrodite VmSummary's `DetailList labelWidth="150px"`; Prism's
+   DetailList is not available here so the fixed label column is set in CSS. */
+.vm-review-step__detail-label {
+  flex: 0 0 150px;
+  max-width: 150px;
+}

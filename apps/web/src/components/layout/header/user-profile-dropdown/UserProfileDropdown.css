@@ -1,0 +1,27 @@
+.user_menu {
+  /* min-width: 200px; */
+
+  .ntnx-menu-item {
+    padding: 0px 15px !important;
+    min-width: 100px;
+  }
+
+  .mg-title {
+    padding: 0px 15px !important;
+
+    .ntnx-title {
+      margin: 10px 0px !important;
+    }
+  }
+}
+
+.user_profile_dropdown {
+  padding: 0px !important;
+  cursor: pointer;
+
+  .user_profile_dropdown_text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-nav-primary-interactive);
+  }
+}

@@ -1,0 +1,110 @@
+/* Search query echoed above the interpretation card (wireframe width) */
+.vm-interpretation-query {
+  width: 640px;
+  max-width: 100%;
+}
+
+/* PRISM: no bordered-card layout primitive; tokens only */
+.ntnx.vm-interpretation-card {
+  padding: 10px;
+  border: 1px solid var(--color-border-separator-contrast);
+  border-radius: 4px;
+  background: var(--color-background-base);
+}
+
+.vm-interpretation-tokens {
+  min-height: 24px;
+}
+
+.vm-interpretation-caption.ntnx-text-label {
+  color: var(--color-text-tertiary-label);
+  font-weight: 400;
+}
+
+/* Clicking a token opens its edit popover */
+.vm-interpretation-token {
+  cursor: pointer;
+}
+
+/* Scope tokens (fixed by the page) and results-page tokens open no edit popover */
+.vm-interpretation-token.-locked,
+.vm-interpretation-token.-static {
+  cursor: default;
+}
+
+/* EBR sizes the label to leave room for the ×; a locked token has none */
+.eb-top .filter-bar-tag.basic-tag.-locked .-label {
+  width: auto !important;
+}
+
+/*
+ * EBR scopes its filter-tag styles to `.eb-top`; outside the browser (results
+ * page) the same tag anatomy needs them restated, with the same tokens.
+ */
+.results-interpretation .filter-bar-tag {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  max-width: 100%;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  color: var(--color-text-primary-interactive);
+  background-color: var(--color-background-info-neutral);
+  font-size: 14px;
+  font-weight: 500;
+
+  & .-label {
+    padding: 0 4px;
+    line-height: 22px;
+    white-space: nowrap;
+  }
+
+  & .-separator {
+    height: 20px;
+  }
+
+  & .-close-button {
+    height: 22px;
+    padding-right: 4px;
+    color: var(--color-text-primary-interactive);
+  }
+
+  & .-close-button:hover {
+    color: var(--color-text-link-hover);
+  }
+}
+
+.vm-interpretation-token-key {
+  font-weight: 600;
+}
+
+/* Placeholder tokens: same footprint as the filter tags that will replace them */
+.vm-interpretation-placeholder {
+  display: block;
+  height: 24px;
+  border-radius: 4px;
+  background: var(--color-background-body);
+
+  &.-w90 {
+    width: 90px;
+  }
+
+  &.-w105 {
+    width: 105px;
+  }
+
+  &.-w120 {
+    width: 120px;
+  }
+}
+
+.vm-interpretation-refine {
+  width: 520px;
+  max-width: 100%;
+}
+
+/* Interpreting: the list is the DS disabled/loading state until filters arrive */
+.vm-search-ebr:has(.vm-interpretation.-interpreting) .main-perspective {
+  opacity: var(--opacity-disabled);
+  pointer-events: none;
+}

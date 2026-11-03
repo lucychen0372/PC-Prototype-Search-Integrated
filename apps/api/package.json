@@ -1,0 +1,30 @@
+{
+  "name": "api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node --experimental-specifier-resolution=node dist/index.js",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write .",
+    "format:lint": "pnpm format && pnpm lint:fix",
+    "typecheck": "tsc --noEmit",
+    "check": "pnpm lint && pnpm typecheck"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.3",
+    "hono": "^4.8.1"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^24.9.1",
+    "eslint": "^9.38.0",
+    "prettier": "^3.6.2",
+    "tsx": "^4.19.4",
+    "typescript": "^5.9.3"
+  }
+}

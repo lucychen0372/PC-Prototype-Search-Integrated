@@ -1,0 +1,36 @@
+/* Security Summary Widget Styles */
+
+.security-summary-chart-section {
+  padding: 10px 20px 5px !important;
+}
+
+.security-summary-chart-label {
+  line-height: 20px;
+}
+
+.security-summary-title {
+  margin: 0;
+}
+
+.security-summary-legend-section {
+  border-top: 1px solid var(--color-border-separator);
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+
+  .security-summary-legend-scrollbar {
+    height: 100%;
+
+    .track-vertical {
+      margin: 0 !important;
+    }
+  }
+
+  .security-summary-legend-item {
+    min-height: 40px;
+
+    &.security-summary-legend-border {
+      border-top: 1px solid var(--color-border-separator);
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.vm-configuration-step__advanced-outer {
+  width: 100%;
+}
+
+.vm-configuration-step__advanced-body {
+  border-radius: 4px;
+  width: 100%;
+}
+
+.vm-configuration-step .collapsible-section .accordion-toggle {
+  width: 100%;
+}

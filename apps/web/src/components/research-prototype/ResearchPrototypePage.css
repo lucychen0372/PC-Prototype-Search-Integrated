@@ -1,0 +1,266 @@
+.research-prototype-page {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+.research-moderator-switcher {
+  position: fixed;
+  right: 20px;
+  top: 68px;
+  z-index: 1200;
+  width: 300px;
+  max-height: calc(100vh - 88px);
+  border: 1px solid var(--color-border-separator);
+  box-shadow: var(--effect-shadow-1);
+}
+
+.research-moderator-switcher--collapsed {
+  width: auto;
+  padding: 10px;
+}
+
+.research-control-panel {
+  overflow: auto;
+}
+
+.research-active-state,
+.research-ai-container,
+.research-concept-preview-card,
+.research-concept-dashboard-pane,
+.research-concept-chat-pane,
+.research-highlight-card,
+.research-metric-card,
+.research-chart-card,
+.research-chat-surface,
+.research-chat-composer,
+.research-assistant-bubble,
+.research-generation-card,
+.research-generation-preview,
+.research-placeholder {
+  border: 1px solid var(--color-border-separator);
+}
+
+.research-result-row {
+  border: 1px solid var(--color-border-separator);
+}
+
+.research-result-row-content {
+  min-width: 0;
+}
+
+.research-niva-alert-row {
+  width: 100%;
+}
+
+.research-niva-alert .alert-message,
+.research-niva-alert-content {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  text-align: left;
+}
+
+.research-neutral-icon {
+  color: var(--color-text-secondary-label);
+}
+
+.research-concept-preview-card {
+  flex: 1 1 360px;
+  min-width: 320px;
+}
+
+.research-concept-niva-frame {
+  min-height: 520px;
+  border: 1px solid var(--color-border-separator);
+}
+
+.research-concept-dashboard-pane {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.research-concept-chat-pane {
+  flex: 0 0 360px;
+  border-left: 1px solid var(--color-border-separator);
+}
+
+.research-concept-dashboard-step {
+  min-height: 100%;
+}
+
+.research-concept-dashboard-canvas {
+  position: relative;
+  min-height: calc(100vh - 50px);
+}
+
+.research-concept-niva-chat .research-concept-assistant-bubble {
+  border: 0;
+}
+
+.research-metric-card {
+  min-width: 160px;
+}
+
+.research-ai-table {
+  width: 100%;
+}
+
+.research-ai-container--folded {
+  max-height: 50vh;
+  overflow: auto;
+}
+
+.research-clickable-card {
+  cursor: pointer;
+}
+
+.research-generation-preview {
+  min-width: 180px;
+}
+
+.research-line-chart {
+  min-height: 140px;
+}
+
+.research-chart-bar {
+  width: 18px;
+  min-height: 12px;
+  background: var(--color-background-primary);
+  border-radius: 2px 2px 0 0;
+}
+
+.research-chart-bar--48 {
+  height: 48px;
+}
+
+.research-chart-bar--52 {
+  height: 52px;
+}
+
+.research-chart-bar--66 {
+  height: 66px;
+}
+
+.research-chart-bar--78 {
+  height: 78px;
+}
+
+.research-chart-bar--84 {
+  height: 84px;
+}
+
+.research-chart-bar--89 {
+  height: 89px;
+}
+
+.research-chart-bar--91 {
+  height: 91px;
+}
+
+.research-scoped-bar-chart {
+  min-height: 110px;
+}
+
+.research-scoped-alert-bar {
+  width: 24px;
+  min-height: 8px;
+  background: var(--color-background-primary);
+  border-radius: 2px 2px 0 0;
+}
+
+.research-scoped-alert-bar--1 {
+  height: 30px;
+}
+
+.research-scoped-alert-bar--2 {
+  height: 60px;
+}
+
+.research-scoped-alert-bar--3 {
+  height: 90px;
+}
+
+.research-user-bubble {
+  max-width: 70%;
+}
+
+.research-niva-workspace,
+.research-niva-workspace-body {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.research-niva-workspace {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: var(--color-background-body);
+}
+
+.research-niva-workspace-body {
+  overflow: hidden;
+  height: calc(100vh - 50px);
+}
+
+.research-niva-dashboard-pane {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: auto;
+}
+
+.research-niva-conversation-pane {
+  flex: 0 0 30vw;
+  min-width: 360px;
+  max-width: 460px;
+  border-left: 1px solid var(--color-border-separator);
+}
+
+.research-niva-conversation-pane .ntnx-text-label,
+.research-niva-conversation-pane .ntnx-title,
+.research-niva-conversation-pane .ntnx-paragraph,
+.research-niva-conversation-pane .ntnx-link,
+.research-niva-conversation-pane span {
+  line-height: 20px !important;
+}
+
+.research-niva-conversation-pane .ntnx-title {
+  line-height: 24px !important;
+}
+
+.research-niva-messages {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+.research-assistant-bubble {
+  padding: 15px;
+  background: var(--color-background-base);
+  max-width: 100%;
+}
+
+.research-niva-chat-composer-shell {
+  flex: 0 0 auto;
+  padding-top: 10px;
+  padding-bottom: 60px;
+  background: var(--color-background-base);
+}
+
+.research-niva-chat-composer-shell .research-chat-composer {
+  align-self: center;
+  box-sizing: border-box;
+  width: calc(100% - 40px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 20px !important;
+  border-color: var(--color-border-focus-interactive);
+}
+
+.research-niva-chat-input {
+  width: 100%;
+}
+
+.research-niva-chat-input textarea {
+  min-height: 70px;
+}
